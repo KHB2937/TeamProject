@@ -25,50 +25,12 @@ public class BoardServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        req.setCharacterEncoding("UTF-8");
-//        String username = req.getParameter("username");
-//        String title = req.getParameter("title");
-//        String content = req.getParameter("content");
-//
-//
-//        EntityManager em = emf.createEntityManager();
-//        em.getTransaction().begin();
-//        Query query = em.createQuery("SELECT s FROM Board s", Board.class);
-//        List<Board> postList = query.getResultList();
-//
-//        Board board = new Board(title, content);
-//        em.persist(board);
-//
-//        em.getTransaction().commit();
-//        em.close();
-//        req.setAttribute("postList", postList);
-//        RequestDispatcher rd = req.getRequestDispatcher("/boardList1.jsp");
-//        rd.forward(req, resp);
         doPost(req, resp);
     }
 
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        request.setCharacterEncoding("UTF-8");
-//        String username = request.getParameter("username");
-//        String title = request.getParameter("title");
-//        String content = request.getParameter("content");
-//
-//        EntityManager em = emf.createEntityManager();
-//
-//        em.getTransaction().begin();
-//        Board board = new Board(title, content);
-//        em.persist(board);
-//        em.getTransaction().commit();
-//
-//        em.close();
-//        request.setAttribute("board", board);
-//        RequestDispatcher dispatcher = request.getRequestDispatcher("boardList1.jsp");
-//
-//        dispatcher.forward(request, response);
-
-
         request.setCharacterEncoding("UTF-8");
         String username = request.getParameter("username");
         String title = request.getParameter("title");
@@ -78,14 +40,14 @@ public class BoardServlet extends HttpServlet {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         Query query = em.createQuery("SELECT s FROM Board s", Board.class);
-        List<Board> postList = query.getResultList();
+        List<Board> boardList = query.getResultList();
 
         Board board = new Board(title, content);
         em.persist(board);
 
         em.getTransaction().commit();
         em.close();
-        request.setAttribute("postList", postList);
+        request.setAttribute("boardList", boardList);
         RequestDispatcher rd = request.getRequestDispatcher("/boardList.jsp");
         rd.forward(request, response);
     }
