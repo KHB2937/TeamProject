@@ -9,9 +9,9 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://aws.connect.psdb.cloud/my_db?sslMode=VERIFY_IDENTITY" />
-            <property name="javax.persistence.jdbc.user" value="ms71ba02oxyiq1810s0q" />
-            <property name="javax.persistence.jdbc.password" value="pscale_pw_71Pn3ygv5szgKA1gfuqOTKcrPVnwELnQghb3lDYQFDo" />
+            <property name="javax.persistence.jdbc.url" value="url" />
+            <property name="javax.persistence.jdbc.user" value="user" />
+            <property name="javax.persistence.jdbc.password" value="password" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
         </properties>
