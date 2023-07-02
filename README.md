@@ -2,5 +2,5 @@
 
 ## 스프링을 이용한 프로젝트
 
-### 안녕하세여
-- 곽희범
+### 기술스택
+- spring boot, notion, html, css, js
