@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main_layout}">
+
+
+<div layout:fragment="content">
+    <!--  여기에다가 추가하면 됨 -->
+    <!--  head, body 등등 사용할 필요없음, 부트스트랩, css 링크 되어있음-->
+    <h2>Edit the board</h2>
+    <form th:object="${board}" th:action="@{/edit}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="BId" th:value="${board.BId}">
+        <div>
+            <label for="bTitle">Title:</label>
+            <input type="text" id="bTitle" name="bTitle" th:value="${board.bTitle}">
+        </div>
+        <div>
+            <label for="bContent">Content:</label>
+            <textarea id="bContent" name="bContent" th:text="${board.bContent}"></textarea>
+        </div>
+        <div>
+            <label for="bImage">Image:</label>
+            <input type="file" id="bImage" th:value="${board.bImage}" name="imageFile"> <!-- RequestParam과 대응 되게 -->
+        </div>
+        <div>
+            <label for="bSound">Sound:</label>
+            <input type="file" id="bSound" th:value="${board.bSound}" name="soundFile"> <!-- RequestParam과 대응 되게 -->
+        </div>
+        <button type="submit">Save</button>
+    </form>
+    <a href="/bList">Back to Board List</a>
+</div>
+
+</html>

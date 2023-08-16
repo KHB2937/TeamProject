@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main_layout}">
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 th:text="${msg}" class="alert alert-success"></h1>
+
+                <h1 th:text="${board.bTitle}">Board Detail</h1>
+                <table class="table">
+                    <tr>
+                        <th>ID</th>
+                        <td th:text="${board.BId}"></td>
+                    </tr>
+                    <tr>
+                        <th>작성자</th>
+                        <td th:text="${board.bUserID}"></td>
+                    </tr>
+                    <tr>
+                        <th>Title</th>
+                        <td th:text="${board.bTitle}"></td>
+                    </tr>
+                    <tr>
+                        <th>Content</th>
+                        <td th:text="${board.bContent}"></td>
+                    </tr>
+                    <tr>
+                        <th>Image</th>
+                        <td>
+                            <img height="200px" th:src="@{'/upload/' + ${board.bImage}}" width="200px" class="img-fluid"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Sound</th>
+                        <td>
+                            <audio controls="controls" th:src="@{'/upload/' + ${board.bSound}}">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Created At</th>
+                        <td th:text="${board.createdAt}"></td>
+                    </tr>
+                </table>
+
+                <!-- 댓글 작성 폼 -->
+                <form th:object="${comment}" th:action="@{/bDetail/{id}/comments(id=${board.BId})}" method="post">
+                    <div class="input-group mb-3">
+<!--                        <input type="hidden" name="cContent" th:field="*{cContent}" class="form-control" placeholder="댓글을 입력하세요" />-->
+                        <input type="text" name="cContent" th:field="*{cContent}" class="form-control" placeholder="댓글을 입력하세요" />
+                        <button type="submit" class="btn btn-primary">댓글 작성</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <h2>댓글 목록</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>작성자</th>
+                        <th>내용</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="comment : ${comments}">
+                        <td th:text="${comment.cUserId}"></td>
+                        <td th:text="${comment.cContent}">
+                        </td>
+                        <td>
+                            <div class="container">
+                                <div>
+                                    <!-- 버튼 -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" th:data-target="'#myModal' + ${comment.cId}">
+                                        수정
+                                    </button>
+                                    <a th:href="@{/comments/{id}/delete(id=${comment.cId})}" class="btn btn-danger">Delete</a>
+                                </div>
+
+                                <!-- 모달 -->
+                                <div class="modal fade" th:id="'myModal' + ${comment.cId}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="myModalLabel">댓글 수정</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- 입력 폼 등 모달 내용 -->
+                                                <form th:object="${comment}" th:action="@{/Update/{id}/comments(id=${comment.cId})}" method="post">
+                                                    <div class="form-group">
+                                                        <input type="hidden" name="BId" th:value="${board.BId}">
+                                                        <input type="hidden" name="cId" th:value="${comment.cId}">
+                                                        <label for="cContent">수정내용</label>
+                                                        <input type="text" id="cContent" name="cContent" th:field="*{cContent}" class="form-control" placeholder="댓글을 입력하세요" />
+                                                    </div>
+                                                    <div class="row">
+                                                        <div>
+                                                            <button type="submit" class="btn btn-primary">수정하기</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!--                                <form th:object="${comment}" th:action="@{/Update/{id}/comments(id=${cId})}" method="post">-->
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+</html>
+<script src="/js/custom.js"></script>
