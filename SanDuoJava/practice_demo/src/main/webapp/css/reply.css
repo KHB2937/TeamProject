@@ -1,0 +1,1131 @@
+/*수정해야할 점..ㅠㅠㅠㅠㅠ
+1. 숫자 탭버튼 클릭할 때마다 둠칫둠칫거림
+2. 맨 마지막 아티클 - 회원정보 뜬금없이 나오는데 못 없애나 ㅠㅠㅠ
+3. 맨마지막 아티클 - 답변 셀렉도 안되고 스타일 줄 수가 없음 ㅠㅠ(이거 말고도 셀렉이 안되는 애들이 몇 있었음...) */
+
+/*클릭하면 다른 내용 뜨는 애들은 안넣어도 됨. 버튼만 만들어도 됨... 
+제품은 제품만 하고 다른 애들은 하나하나 안만들어도 됨.나중에 자바스크립트 끝나면 퍼체이스랑 멤버십 유아이에서 못 했던 자바스크립트 부분들 다 구현하게 할거임...다 채워야지 포트폴리오가 됨... 그럼 회사에 포트폴리오 제출 시 많은 데이터를 처리하는데 두려움이 없고 근성이 있는 사람으로 인식되어 호감도가 높아짐...
+FE는 겁나게 많은 데이터를 처리하는 능력이 있어야 함...*/
+/*https://codepen.io/lshjju/pen/poVwbbd?editors=1100*/
+/*https://codepen.io/Juyeon/pen/LzjNjz 
+파일 업로드 이미지 버튼 참고 자료...*/
+
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+/*font-family: 'Nanum Myeongjo', serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+/*font-family: 'Playfair Display', serif;*/
+
+* {
+   margin: 0;
+   padding: 0;
+   outline: 0px solid silver;
+   color: #000;
+   list-style: none;
+   word-break: break-all;
+   text-align: left;
+   box-sizing: border-box;
+}
+
+body {
+  margin: 50px 0;
+  position: relative;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald', sans-serif;
+}
+
+h1 {
+  font-size: 3rem;
+  line-height: 5rem;
+}
+
+h2 {
+  font-size: 2.3rem;
+  line-height: 4rem;
+  font-family: 'Playfair Display', serif;
+}
+
+h3 {
+  font-size: 1.8rem;
+  line-height: 2.5rem;
+}
+
+h4 {
+  font-size: 1.4rem;
+  line-height: 1.5rem;
+}
+
+h5 {
+  font-size: 1rem;
+  line-height: 1rem;
+  margin-bottom: 20px;
+}
+
+h6 {
+  font-size: 0.8rem;
+  line-height: 1rem;
+}
+
+article {
+  padding: 30px 5%;
+  margin-top: 80px;
+}
+
+section {
+  padding: 50px 7%;
+  border-radius: 10px;
+  border: 2px solid #EBEBEB;
+}
+
+div {
+  width: 100%;
+}
+
+a:link {
+  color: #000;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #000;
+}
+
+a:hover {
+  color: #000;
+}
+
+a:active {
+  color: #000;
+}
+
+button {
+  width: 100%;
+  padding: 15px 0;
+  margin: 5px 0;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: 0.5s;
+  cursor: pointer;
+  border: 1px solid #fff;
+  width: 45%;
+}
+
+.greybtn {
+  color: #000;
+  background: #EAEAEA;
+}
+
+.greybtn:hover {
+  background: #C9C9C9;
+}
+
+.blackbtn {
+  color: #fff;
+  background: #626262;
+}
+
+.blackbtn:hover {
+  background: #000;
+}
+
+input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #fff;
+  border-bottom: 1px solid #C8C8C8;
+  border-radius: 5px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #C8C8C8;
+}
+
+textarea:focus {
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+
+.center {
+  text-align: center;
+}
+
+.padupdw {
+  padding: 20px 0;
+}
+
+.martop30 {
+  margin-top: 30px;
+}
+
+.martop50 {
+  margin-top: 50px;
+}
+
+.marrig {
+  margin-right: 20px;
+}
+
+.flex {
+  display: flex;
+}
+
+.spabet {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inline {
+  display: inline;
+}
+
+.grey {
+  color: #9B9A9A;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #C8C8C8;
+  font-size: 1rem;
+  -webkit-appearance:none; /* for chrome */
+  -moz-appearance:none; /*for firefox*/
+  appearance:none;
+  background:url('https://cdn-icons-png.flaticon.com/512/60/60995.png') no-repeat 97% 50%/10px auto;
+}
+
+select::-ms-expand {
+   display:none;/*for IE10,11*/
+}
+
+select:focus {
+  border: 1px solid #000;
+}
+
+/*숫자 탭메뉴*/
+.container{
+	width: 100%;
+  padding: 30px 0;
+}
+
+ul {
+  justify-content: center;
+}
+
+ul.tabs{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+ul.tabs li{
+	padding: 0 20px;
+  margin: auto 0;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  color: #9B9A9A;
+	cursor: pointer;
+}
+
+ul.tabs li.current{
+	margin: 0 10px;
+  padding: 0 10px;
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+  color: #000;
+  border-bottom: 3px solid red;
+}
+
+.tab-content{
+	display: none;
+	background: #ededed;
+	padding: 15px;
+}
+
+.tab-content .current{
+	display: inherit;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+/*start*/
+
+.board> :nth-child(2)> :nth-child(3) input {
+  border-radius: 0px;
+}
+
+.board> :nth-child(2)> :nth-child(6)> span {
+  padding: 10px 15px;
+  background: #F5F5F5;
+}
+
+.board img {
+  width: 25px;
+  background: #F1F2F8;
+  margin: 13px 12px;
+}
+
+.board .file-upload {
+  display: flex;
+}
+
+.board .file-upload label {
+    color: #999;
+    background-color: #fdfdfd;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    margin: 20px 20px 20px 0;
+}
+
+.board .file-upload input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+}
+
+.board> :nth-child(2)> :nth-child(3)> label input {
+  width: 100%;
+}
+
+.board> :nth-child(2)> :nth-child(5) label {
+  background: #F1F2F8;
+}
+
+.post h5 {
+  margin: auto 0;
+  padding: 10px 0;
+}
+
+.post img {
+  width: 100%;
+}
+
+.post> :nth-child(3) {
+  margin-top: 20px;
+}
+
+.post> :nth-child(4) {
+  width: 100%;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #C9C9C9;
+}
+
+.post> :nth-child(4)> h6 {
+  width: 40%;
+  margin: auto 0;
+}
+
+.post> :nth-child(4)> div {
+  width: 60%;
+  justify-content: right;
+}
+
+.post> :nth-child(4)> div> h6 {
+  margin: auto 0;
+}
+
+.post> :nth-child(4)> div> :nth-child(2), .post> :nth-child(4)> div> :nth-child(3) {
+  padding: 10px 5px;
+}
+
+.post> :nth-child(5) h5{
+  margin: 10px 0 30px 0;
+}
+
+.post> :nth-child(5)> div> div {
+  overflow: hidden;
+}
+
+.post> :nth-child(5)> div> div img {
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.post> :nth-child(5)> div> div img:hover {
+  transform: scale(1.3);
+}
+
+.post .postlist p {
+  margin: 10px 0 30px 0;
+}
+
+.post .icons {
+  justify-content: center;
+  margin-top: 50px;
+  border-bottom: 2px solid #989797;
+}
+
+.post .icons> div {
+  background: #626262;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border-bottom: 1px solid #000;
+  margin: 50px 10px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.post .icons> div:hover {
+  background: #000;
+}
+
+.post .icons> div img {
+  width: 20px;
+  margin: 20px;
+}
+
+.postlist {
+  text-align: center;
+}
+
+.post .reply> h5 {
+  font-weight: bold;
+  backgroud: lime;
+  margin: 50px 0 30px 0;
+}
+
+.post .reply> div> img {
+  width: 30px;
+  height: 30px;
+  margin-right: 30px;
+}
+
+.post .reply> div> div> img {
+  width: 20px;
+  height: 20px;
+}
+
+.post .reply> div> div> div> h5, .post .reply> div> div> div> p {
+  padding: 5px 0;
+  margin: 0;
+}
+
+.post .reply> :nth-child(3) {
+  border-top: 1px solid #C9C9C9;
+  border-bottom: 1px solid #C9C9C9;
+}
+
+.post> :nth-child(5)> :nth-child(4)> :nth-child(5)> div {
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+/*이거 위치 지정 너무 이상함... 원래는 post> :nth-child(9)여야 함....*/
+.post> :nth-child(5)> :nth-child(4)> :nth-child(7) label {
+  margin: auto 0;
+}
+
+
+.post> :nth-child(5)> :nth-child(4)> :nth-child(7) button {
+  width: 120px;
+}
+
+.secret {
+  margin: 80px 0 30px 0;
+}
+
+.secret> h5 {
+  padding: 7px 0;
+  border-bottom: 1px solid #000;
+}
+
+.secret> div {
+  height: 130px;
+  overflow: hidden;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.secret> div> p {
+  text-align: left;
+  margin: auto 0;
+  height: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp: 4;
+  line-height: 1.3rem;
+  max-height: 5.6rem;
+}
+
+.secret> div> img {
+  width: 90px;
+  height: 100px;
+  margin: auto 0;
+  border-radius: 5px;
+  margin-left: 20px;
+}
+
+.secret> :nth-child(3) {
+  border-top: 1px solid #C9C9C9;
+  border-bottom: 1px solid #C9C9C9;
+}
+
+.secret> :nth-child(4) {
+  border-bottom: 1px solid #C9C9C9;
+}
+
+.board_list> h4 {
+  margin-bottom: 80px;
+}
+
+.board_list> div> :nth-child(1) {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 40px;
+} 
+
+.board_list> div> :nth-child(1) img {
+  width: 100%;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.board_list> div> :nth-child(1) img:hover {
+  transform: scale(1.3);
+}
+
+.board_list> div> :nth-child(2) {
+  margin: 20px 0;
+  border-bottom: 1px solid #C9C9C9;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.board_list> div> :nth-child(2) p {
+  margin: 20px 0;
+}
+
+.board_list> div> :nth-child(2) h6 {
+  margin-bottom: 30px;
+}
+
+.board_list> :nth-child(6) {
+  text-align: center;
+}
+
+.board_list> :nth-child(6) button {
+  border-radius: 30px;
+  width: 100px;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #E9E9E9;
+  background: #fff;
+  color: #000;
+  text-align: center;
+}
+
+.board_list> :nth-child(6) button:hover {
+  background: #E9E9E9;
+}
+
+.qna> h2 {
+  margin: 50px 0 150px 0;
+}
+
+.qna> section> :nth-child(3) {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #C8C8C8;
+  margin-bottom: 30px;
+}
+
+.qna> section> :nth-child(3)> h5 {
+  margin: auto 0;
+}
+
+.qna> section> :nth-child(3)> img {
+  width: 10px;
+  height: 10px;
+  margin: auto 0;
+  margin-right: 3px;
+}
+
+.qna> section> :nth-child(4) {
+  border-top: 1px solid #C9C9C9;
+}
+
+.qna> section> :nth-child(4) p {
+  padding: 5px 10px;
+}
+
+.qna .file-upload {
+  display: flex;
+  position: relative;
+  width: 30%;
+}
+
+.qna .file-upload label {
+  color: #000;
+  background-color: #EFF2FD;
+  cursor: pointer;
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  padding: 12px 0;
+  border-radius: 5px;
+  border: 1px solid #C9C9C9;
+}
+
+.qna label {
+  margin: auto 0;
+}
+
+.qna label input[type="checkbox"] {
+  transform: scale(1.5);
+  border-radius: 0px;
+}
+
+.qna .file-upload input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
+.qna> section> :nth-child(5) h6 {
+  width: 50%;
+  margin: 30px 0 0px 0;
+  position: absolute;
+  transform: translate(60%, 0%);
+}
+
+.qna> section> :nth-child(6) {
+  background: #ECEAEA;
+  margin: 50px 0;
+  padding: 30px 20px;
+  border-radius: 5px;
+}
+
+.qna> section> :nth-child(6) p {
+  margin-bottom: 30px;
+}
+
+.qna> section> :nth-child(6)> p span {
+  font-weight: bolder;
+}
+
+.qna> section> :nth-child(6)> :nth-child(3)> span {
+  margin: auto 10px;
+}
+
+.qna> section> :nth-child(6) input {
+  margin: 10px 0;
+  border: 1px solid #C8C8C8;
+}
+
+.qna> section> :nth-child(6)> :nth-child(3) {
+  width: 100%;
+}
+
+.qna> section> :nth-child(6)> :nth-child(3)> select {
+  width: 30%;
+  height: 50px;
+  margin: auto 0;
+  background:url('https://cdn-icons-png.flaticon.com/512/60/60995.png') no-repeat 91% 50%/10px auto;
+}
+
+.qna> section> :nth-child(6)> :nth-child(3) input {
+  width: 30%;
+  height: 40px;
+  font-size: 1.5rem;
+  padding: 25px 10px;
+}
+
+.qna> section> :nth-child(6)> :nth-child(5) input[type="text"] {
+  width: 49%;
+  height: 40px;
+  font-size: 1.5rem;
+  padding: 25px 10px;
+}
+
+.qna> section> :nth-child(6)> :nth-child(5) select {
+  width: 49%;
+  height: 50px;
+  margin: auto 0;
+  background:url('https://cdn-icons-png.flaticon.com/512/60/60995.png') no-repeat 95% 50%/10px auto;
+}
+
+.qna> section> :nth-child(6) button {
+  width: 95%;
+  background: #F32626;
+  border: 1px solid #F32626;
+  color: #fff;
+}
+
+.qna> section> :nth-child(6) button:hover {
+  background: #000;
+  border: 1px solid #000;
+}
+
+.complete img {
+  margin: 70px 0 30px 0;
+}
+
+.complete h5 {
+  margin: 30px 0 50px 0;
+}
+
+.complete button {
+  width: 150px; 
+  margin: 0 2px;
+}
+
+.history section> :nth-child(2) h4 {
+  padding: 50px 0 20px 0;
+  margin: ;
+  border-bottom: 1px solid #000;
+}
+
+.history section> :nth-child(3) {
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.history section> :nth-child(3) button {
+  width: 100px;
+  height: 25px;
+  padding: 0;
+  margin: auto 0;
+  border-radius: 25px;
+  font-size: 0.7rem;
+  background: #F32626;
+  border: 1px solid #F32626;
+  color: #fff;
+}
+
+.history section> :nth-child(3)> :nth-child(1) button {
+  background: #505050;
+  border: 1px solid #505050;
+}
+
+.history section> :nth-child(3) img {
+  width: 10px;
+  height: 100%;
+  margin: auto 0;
+  margin-right: 5%;
+}
+
+.history section> :nth-child(3)> div> div> div h5 {
+  margin: 20px 10px 20px 20px;
+}
+
+.history> section> :nth-child(3)> div> :nth-child(1) {
+  border-bottom: 1px solid #C9C9C9;
+  padding: 20px 0 20px 20px;
+}
+
+.history> section> :nth-child(3)> div> :nth-child(2)> div {
+  background: #EFF1FC;
+  padding: 30px 10px;
+  border-bottom: 1px solid #C9C9C9;
+}
+
+.history> section> :nth-child(3)> div> :nth-child(2)> div> :nth-child(1) {
+  margin-bottom: 10px;
+}
+
+.button-container {
+  position: relative;
+}
+
+#dd1 {
+  display:none;
+}
+
+#dd2 {
+  display:none;
+}
+
+#dd3 {
+  display:none;
+}
+
+.news> section {
+  background: url('https://png.pngtree.com/thumb_back/fh260/back_our/20190622/ourmid/pngtree-business-geometric-minimalist-wind-banner-background-image_232189.jpg') no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.news h4 {
+  margin: 20px 0 0 0;
+}
+
+.news span {
+  font-weight: bold;
+  font-size: 3rem;
+  line-height: 1rem;
+  color: #F32626;
+}
+
+.total select {
+  width: 100px;
+  height: 50px;
+  font-size: 0.8rem;
+  background:url('https://cdn-icons-png.flaticon.com/512/60/60995.png') no-repeat 85% 50%/10px auto;
+}
+
+.total input {   
+  width: 100%;
+  border: 1px solid #fff;
+  height: 50px;
+}
+
+/*전체 select & 검색어 입력*/
+.total> section> :nth-child(2) {
+  margin: 30px 0;
+}
+
+.total> section> :nth-child(2) img {
+  width: 20px;
+  height: 20px;
+  margin: auto 10px auto 0;
+}
+
+.total> section> :nth-child(2)> div {
+  border: 1px solid #C9C9C9;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-bottom: 30px;
+}
+
+.digicook p {
+  margin: 20px 0 30px 0;
+}
+
+.digicook h6 {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #C9C9C9;
+}
+
+.digicook> div {
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.digicook> div> :nth-child(1) {
+  width: 100%;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  margin: 20px 0;
+  background: yellow;
+}
+
+.digicook> div> div> img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.digicook> div> div> img:hover {
+  transform: scale(1.3);
+}
+
+.digicook> :nth-child(2)> :nth-child(1) {
+  background: lime;
+  height: 200px;
+}
+
+.digicook> div> div> div {
+  width: 40px;
+  height: 40px;
+  background: red;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+ 
+.digicook> div> div> div img {
+  width: 40px;
+  margin: 0 auto;
+}
+
+.tabmenu> :nth-child(1) {
+  margin: 50px 0;
+}
+
+.tabmenu> :nth-child(1) button {
+  border-radius: 0px;
+}
+
+.tab-button {
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: 1px solid #C9C9C9;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tab-button2 {
+  font-size: 0.9rem;
+  font-weight: bold;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tabmenu-color {
+  background: red;
+  color: #fff;
+}
+
+.tabmenu-color2 {
+  background: #fff;
+  color: #000;
+}
+
+.tabmenu> :nth-child(3) {
+  width: 260px;
+  margin: 80px auto 0px;
+} 
+
+.tabmenu> :nth-child(3) h3 {
+  margin: 0 10px;
+  padding: 0 10px;
+  border-bottom: 3px solid red;
+}
+
+.tabmenu> :nth-child(3) h4 {
+  padding: 0 20px;
+  margin: auto 0;
+} 
+
+/*아코디언 시작*/
+.tabmenu> :nth-child(2) {
+  border-top: 2px solid #C9C9C9;
+  border-bottom: 2px solid #C9C9C9;
+}  
+
+.tabmenu> :nth-child(2)> div> div> div {
+  width: 100%;
+  padding: 40px 30px;
+  background: #EFF1F4;  /*background: #F5F5F5;*/
+  border-top: 1px solid #C9C9C9;
+  font-weight: bold;
+}
+
+.tabmenu> :nth-child(2)> div> div> div> :nth-child(1) {
+  margin: auto 0;
+  width: 20%;
+  font-weight: bold;
+}
+
+.tabmenu> :nth-child(2)> div> div> div> :nth-child(2) {
+  width: 78%;
+}
+
+.tabmenu> :nth-child(2)> div> div> :nth-child(2),
+.tabmenu> :nth-child(2)> div> div> :nth-child(4), 
+.tabmenu> :nth-child(2)> div> div> :nth-child(6), 
+.tabmenu> :nth-child(2)> div> div> :nth-child(8),
+.tabmenu> :nth-child(2)> div> div> :nth-child(10),
+.tabmenu> :nth-child(2)> div> div> :nth-child(12) {
+  width: 100%;
+  display: flex;
+  background: #D8D8D8;
+  display: none;
+  overflow: hidden;
+}
+
+.tabmenu> :nth-child(2)> div> div> :nth-child(2)> :nth-child(1), 
+.tabmenu> :nth-child(2)> div> div> :nth-child(4)> :nth-child(1), 
+.tabmenu> :nth-child(2)> div> div> :nth-child(6)> :nth-child(1), 
+.tabmenu> :nth-child(2)> div> div> :nth-child(8)> :nth-child(1),
+.tabmenu> :nth-child(2)> div> div> :nth-child(10)> :nth-child(1),
+.tabmenu> :nth-child(2)> div> div> :nth-child(12)> :nth-child(1) {
+  width: 30%;
+  margin-top: 0;
+  color: #000;
+}
+
+.tabmenu> :nth-child(2)> div> div> :nth-child(2)> :nth-child(2), 
+.tabmenu> :nth-child(2)> div> div> :nth-child(4)> :nth-child(2),
+.tabmenu> :nth-child(2)> div> div> :nth-child(6)> :nth-child(2),
+.tabmenu> :nth-child(2)> div> div> :nth-child(8)> :nth-child(2),
+.tabmenu> :nth-child(2)> div> div> :nth-child(10)> :nth-child(2),
+.tabmenu> :nth-child(2)> div> div> :nth-child(12)> :nth-child(2) {
+  width: 70%;
+}
+
+  
+.que {
+  position: relative;
+  padding: 17px 0;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.que.on>span{
+}
+  
+.anw {
+  font-size: 14px;
+  padding: 27px 0;
+}
+
+
+/* pc 버전 */
+@media screen and (min-width: 1366px) {
+  body {
+    width: 100%;
+  }
+  
+  article {
+    width: 1200px;
+    margin: 80px auto;
+    padding: 50px 5%;
+
+  }
+  
+  section {
+    padding: 50px 10%;
+  }
+  
+  .post img {
+    width: 500px;
+
+  }
+  
+  .post> :nth-child(5)> div> :nth-child(1) {
+    text-align: center;
+  }
+  
+  .total> section> :nth-child(3)> div {
+    display: flex;
+    border-bottom: 1px solid #C9C9C9;
+  }
+  
+  .total> section> :nth-child(3)> div> :nth-child(2) {
+    margin: 20px 0 0 30px;
+  }
+  
+  .total> section> :nth-child(3)> div> :nth-child(2)> :nth-child(3) {
+    border: 1px solid #fff;
+  }
+  
+  
+  .board_list> :nth-child(2) {
+    display: flex;
+    height: 280px;
+    border-bottom: 1px solid #C9C9C9;
+  }
+  
+  .board_list> :nth-child(2)> :nth-child(2) {
+    margin: auto 0;
+    padding-left: 30px;
+    border: 1px solid #fff;
+  }
+  
+  .board_list> :nth-child(3) {
+    display: flex;
+    height: 280px;
+    border-bottom: 1px solid #C9C9C9;
+  }
+  
+  .board_list> :nth-child(3)> :nth-child(1) {
+    margin: auto 0;
+  }
+  
+  .board_list> :nth-child(3)> :nth-child(2) {
+    margin: auto 0;
+    padding-left: 30px;
+    border: 1px solid #fff;
+  }
+  
+  .board_list> :nth-child(4) {
+    display: flex;
+    height: 280px;
+    border-bottom: 1px solid #C9C9C9;
+  }
+  
+  .board_list> div> :nth-child(1) {
+    margin: auto 0;
+    height: 220px;
+  }
+  
+  .board_list img {
+    height: 220px;
+  }
+  
+  .board_list> :last-child {
+    height: 140px;
+    padding-top: 50px;
+  }
+  
+  .board_list> :last-child button {
+    height: 40px;
+  }
+  
+  .board_list> :nth-child(4)> :nth-child(1) {
+    margin: auto 0;
+  }
+  
+  .board_list> :nth-child(4)> :nth-child(2) {
+    margin: auto 0;
+    padding-left: 30px;
+    border: 1px solid #fff;
+  }
+  
+  .board_list> :nth-child(5) {
+    display: flex;
+    height: 280px;
+    border-bottom: 1px solid #C9C9C9;
+  }
+  
+  .board_list> :nth-child(5)> :nth-child(1) {
+    margin: auto 0;
+  }
+  
+  .board_list> :nth-child(5)> :nth-child(2) {
+    margin: auto 0;
+    padding-left: 30px;
+    border: 1px solid #fff;
+  }
+  
+  .qna> section> :nth-child(3) img {
+    margin-right: 20px;
+  }
+  
+  .qna> section> :nth-child(5) h6 {
+    width: 50%;
+    margin: 30px 0 0px 0;
+    position: absolute;
+    transform: translate(15%, 15%);
+  }
+  
+  .tabmenu> :nth-child(2)> div> div> div> :nth-child(1) {
+    width: 10%;
+  }
+
+  .tabmenu> :nth-child(2)> div> div> div> :nth-child(2) {
+    width: 88%;
+  }
+  
+}  
